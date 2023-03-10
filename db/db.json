@@ -1,0 +1,39 @@
+{
+    "dados":[],
+    
+    "pallets":{
+        "pequenos":[
+            {
+
+                "id": "1",
+                "cor": "bege"
+            },
+            {
+                "id": "2",
+                "cor": "marrom"
+            }
+        ],
+        "medio":[
+            {
+
+                "id": "1",
+                "cor": "bege"
+            },
+            {
+                "id": "2",
+                "cor": "marrom"
+            }
+        ],
+        "grande":[
+            {
+
+                "id": "1",
+                "cor": "bege"
+            },
+            {
+                "id": "2",
+                "cor": "marrom"
+            }
+        ]
+    }
+}

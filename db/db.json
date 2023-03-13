@@ -1,39 +1,8 @@
 {
-    "dados":[],
-    
-    "pallets":{
-        "pequenos":[
-            {
-
-                "id": "1",
-                "cor": "bege"
-            },
-            {
-                "id": "2",
-                "cor": "marrom"
-            }
-        ],
-        "medio":[
-            {
-
-                "id": "1",
-                "cor": "bege"
-            },
-            {
-                "id": "2",
-                "cor": "marrom"
-            }
-        ],
-        "grande":[
-            {
-
-                "id": "1",
-                "cor": "bege"
-            },
-            {
-                "id": "2",
-                "cor": "marrom"
-            }
-        ]
-    }
+  "user": {
+    "email": "bruna.gnallis@gmail.com",
+    "phone": "(16)981744249",
+    "CPF": "230492031",
+    "img": null
+  }
 }

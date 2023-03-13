@@ -1,98 +1,115 @@
 
 <template>
-  <div class="cols-12 col-md-6 container mt-4 pt-2">
-    <h2 >Formulário de Cadastro</h2>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+  <div class="cols-12 col-md-6 container">
+    <h2 class="mb-4" style="text-align: center">Formulário de Cadastro</h2>
+    <b-form @submit="createUser" @reset="onReset" >
       <b-form-group
         id="input-group-1"
         label="Email:"
         label-for="input-1"
+        class="my-4"
       >
         <b-form-input
           id="input-1"
-          v-model="form.email"
+          v-model="email"
           type="email"
           placeholder="Email"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Whatsapp:" label-for="input-2">
+      <b-form-group
+        id="input-group-2"
+        label="Whatsapp:"
+        label-for="input-2"
+        class="my-4"
+      >
         <b-form-input
           id="input-2"
-          v-model="form.phone"
+          v-model="phone"
           placeholder="(xx) xxxx-xxx"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-3" label="CPF" label-for="input-3">
-        <b-form-input
-          id="input-3"
-          v-model="form.CPF"
-          required
-        ></b-form-input>
+      <b-form-group
+        id="input-group-3"
+        label="CPF"
+        label-for="input-3"
+        class="my-4"
+      >
+        <b-form-input id="input-3" v-model="CPF" required></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-4" label="Imagem" label-for="input-4">
-      <b-form-file solo id="input-4">
-        <template slot="file-name" slot-scope="{ names }">
-          <b-badge variant="dark">{{ names[0] }}</b-badge>
-          <b-badge v-if="names.length > 1" variant="dark" class="ml-1">
-            + {{ names.length - 1 }}
-          </b-badge>
-        </template>
-      </b-form-file>
-    </b-form-group>
-
-      <b-button type="submit" variant="primary" class="mt-4 mr-4 ml-2">Submit</b-button>
-      
-      <b-button type="reset" variant="danger" class="mt-4 mr-4 ml-2">Reset</b-button>
-    
+      <b-form-group
+        id="input-group-4"
+        label="Imagem"
+        label-for="input-4"
+        class="my-4"
+      >
+        <b-form-file solo id="input-4" v-model="img">
+          <template slot="file-name" slot-scope="{ names }">
+            <b-badge variant="dark">{{ names[0] }}</b-badge>
+            <b-badge v-if="names.length > 1" variant="dark" class="ml-1">
+              + {{ names.length - 1 }}
+            </b-badge>
+          </template>
+        </b-form-file>
+      </b-form-group>
+      <div style="text-align: center">
+        <b-button type="submit" variant="primary" class="my-4 mr-4 ml-2"
+          >Enviar</b-button
+        >
+        <b-button type="reset" variant="danger" class="my-4 mr-4 ml-2"
+          >Limpar</b-button
+        >
+      </div>
     </b-form>
   </div>
 </template>
-  
+
   <script>
+import axios from "axios";
 export default {
   data() {
     return {
-      form: {
         email: "",
         phone: "",
         CPF: "",
-      },
-      show: true,
+        img: null
     };
   },
   methods: {
-    onSubmit(event) {
-        event.preventDefault()
-        alert(JSON.stringify(this.form))
-      },
+    async createUser(e) {
+      e.preventDefault();
+      
+      const data = {
+        email: this.email,
+        phone: this.phone,
+        CPF: this.CPF,
+        img: this.img,
+      };
+
+      const res = await axios.post("http://localhost:3000/user",data
+      );
+      
+      console.log(res)
+    },
     onReset(event) {
       event.preventDefault();
-      // Reset our form values
-      this.form.email = "";
-      this.form.phone = "";
-      this.form.CPF = "";
-      // Trick to reset/clear native browser form validation state
-      this.show = false;
-      this.$nextTick(() => {
-        this.show = true;
-      });
-    }
+      this.email = "";
+      this.phone = "";
+      this.CPF = "";
+    },
   },
 };
 </script>
 
 <style scoped>
-.container {
-  align-items: center;
-  text-align: center;
-  margin-top: 16px;
-  gap: 8px;
-  padding: 16px;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
 }
-
 </style>
